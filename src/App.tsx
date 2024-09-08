@@ -24,11 +24,11 @@ function checkWin(cells: Mark[]): boolean {
 export default function App() {
   const players: Mark[] = ["X", "O"];
   const [cells, setCells] = useState(Array<Mark>(9).fill(undefined));
-  const [player, setPlayer] = useState(0);
+  const [turn, setTurn] = useState(0);
   const [winner, setWinner] = useState<number | undefined>();
 
   const reset = () => {
-    setPlayer(1);
+    setTurn(-1);
     setWinner(undefined);
     setCells(Array(9).fill(undefined));
   };
@@ -37,31 +37,40 @@ export default function App() {
     if (c || winner != undefined) return;
     setCells((prev) => {
       const copy = [...prev];
-      copy[idx] = players[player];
+      copy[idx] = players[turn % players.length];
       return copy;
     });
   };
+  console.log({ turn });
 
   useEffect(() => {
     if (checkWin(cells)) {
-      setWinner(player);
+      setWinner(turn);
       return;
     }
-    setPlayer((prev) => (prev + 1) % players.length);
+    setTurn((prev) => prev + 1);
   }, [cells]);
 
   const Player = (
-    <span className="text-indigo-600 font-extrabold">{players[player]}</span>
+    <span className="text-indigo-600 font-extrabold">
+      {players[turn % players.length]}
+    </span>
   );
   return (
     <>
       <div className="flex h-dvh gap-4 w-dvw flex-col items-center justify-center bg-neutral-50 text-3xl sm:text-4xl md:text-5xl lg:6xl font-[Lexend,sans-serif]">
         {winner != undefined ? (
           <p className="p-4 border border-green-400 bg-green-200 rounded-lg">
-            Player {Player} won
+            Player {Player} won!
+          </p>
+        ) : turn > 8 ? (
+          <p className="p-4 border rounded-lg bg-yellow-100 border-orange-200">
+            It's a match :|
           </p>
         ) : (
-          <p className="p-4 border rounded-lg">It's player {Player}'s turn</p>
+          <p className="p-4 border rounded-lg">
+            It's player {Player}'s turn...
+          </p>
         )}
         <div className="grid grid-cols-3 grid-rows-3 shadow-lg">
           {cells.map((c, i) => {
