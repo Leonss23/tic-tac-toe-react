@@ -24,7 +24,7 @@ function checkWin(cells: Mark[]): boolean {
 export default function App() {
   const players: Mark[] = ["X", "O"];
   const [cells, setCells] = useState(Array<Mark>(9).fill(undefined));
-  const [turn, setTurn] = useState(0);
+  const [turn, setTurn] = useState(-1);
   const [winner, setWinner] = useState<number | undefined>();
 
   const reset = () => {
