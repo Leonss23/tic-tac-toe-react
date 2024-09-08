@@ -55,7 +55,7 @@ export default function App() {
   );
   return (
     <>
-      <div className="flex h-dvh gap-4 w-dvw flex-col items-center justify-center bg-neutral-50 text-5xl font-[Lexend,sans-serif]">
+      <div className="flex h-dvh gap-4 w-dvw flex-col items-center justify-center bg-neutral-50 text-3xl sm:text-4xl md:text-5xl lg:6xl font-[Lexend,sans-serif]">
         {winner != undefined ? (
           <p className="p-4 border border-green-400 bg-green-200 rounded-lg">
             Player {Player} won
@@ -68,7 +68,7 @@ export default function App() {
             return (
               <button
                 key={"cell" + i}
-                className="aspect-square w-56 border-2 p-8 text-9xl hover:shadow-lg active:bg-neutral-100"
+                className="aspect-square w-24 sm:w-36 md:w-44 lg:w-56 text-6xl sm:text-7xl md:text-8xl lg:text-9xl border-2 p-4 hover:shadow-lg active:bg-neutral-100"
                 onClick={() => checkCell(c, i)}
               >
                 {c}
