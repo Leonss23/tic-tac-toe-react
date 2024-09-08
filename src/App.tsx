@@ -26,7 +26,6 @@ export default function App() {
   const [cells, setCells] = useState(Array<Mark>(9).fill(undefined));
   const [player, setPlayer] = useState(0);
   const [winner, setWinner] = useState<number | undefined>();
-  console.log({ winner, player });
 
   const reset = () => {
     setPlayer(1);
@@ -45,7 +44,6 @@ export default function App() {
 
   useEffect(() => {
     if (checkWin(cells)) {
-      console.log("someone won");
       setWinner(player);
       return;
     }
