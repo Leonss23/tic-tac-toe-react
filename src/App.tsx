@@ -50,24 +50,25 @@ export default function App() {
     setPlayer((prev) => (prev + 1) % players.length);
   }, [cells]);
 
+  const Player = (
+    <span className="text-indigo-600 font-extrabold">{players[player]}</span>
+  );
   return (
     <>
-      <div className="flex h-dvh w-dvw flex-col items-center justify-center bg-neutral-50">
+      <div className="flex h-dvh gap-4 w-dvw flex-col items-center justify-center bg-neutral-50 text-5xl font-[Lexend,sans-serif]">
         {winner != undefined ? (
-          <p>
-            Player <span>{players[player]}</span> won
+          <p className="p-4 border border-green-400 bg-green-200 rounded-lg">
+            Player {Player} won
           </p>
         ) : (
-          <p>
-            It's player <span>{players[player]}</span>'s turn
-          </p>
+          <p className="p-4 border rounded-lg">It's player {Player}'s turn</p>
         )}
-        <div className="grid grid-cols-3 grid-rows-3">
+        <div className="grid grid-cols-3 grid-rows-3 shadow-lg">
           {cells.map((c, i) => {
             return (
               <button
                 key={"cell" + i}
-                className="aspect-square w-56 border-2 p-8 text-9xl"
+                className="aspect-square w-56 border-2 p-8 text-9xl hover:shadow-lg active:bg-neutral-100"
                 onClick={() => checkCell(c, i)}
               >
                 {c}
@@ -75,7 +76,12 @@ export default function App() {
             );
           })}
         </div>
-        <button onClick={reset}>Reset</button>
+        <button
+          onClick={reset}
+          className="p-4 border-2 rounded-lg border-dashed border-neutral-400 active:bg-neutral-100"
+        >
+          Reset
+        </button>
       </div>
     </>
   );
